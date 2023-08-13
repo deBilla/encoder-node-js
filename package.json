@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "fluent-ffmpeg": "^2.1.2"
+  }
+}

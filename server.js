@@ -1,24 +1,14 @@
-const ffmpeg = require('fluent-ffmpeg');
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 3000;
 
-const inputPath = 'input.mp4';
-const outputPath = 'output_dash/output.mpd';
-const scaleOptions = ['scale=1280:720', 'scale=640:320'];
-const videoCodec = 'libx264';
-const x264Options = 'keyint=24:min-keyint=24:no-scenecut';
-const videoBitrate = '2000k';
+app.use(express.static('output_dash'));
 
-ffmpeg()
-  .input(inputPath)
-  .videoFilters(scaleOptions)
-  .videoCodec(videoCodec)
-  .addOption('-x264opts', x264Options)
-  .videoBitrate(videoBitrate)
-  .format('dash')
-  .output(outputPath)
-  .on('end', () => {
-    console.log('DASH encoding complete.');
-  })
-  .on('error', (err) => {
-    console.error('Error:', err.message);
-  })
-  .run();
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html')); // Replace with your HTML file
+  });
+
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});

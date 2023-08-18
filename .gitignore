@@ -3,3 +3,6 @@ package-lock.json
 output_dash
 output_segments
 input.mp4
+output
+Dash
+dd.py
